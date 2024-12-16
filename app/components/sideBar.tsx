@@ -9,7 +9,7 @@ import Link from "next/link";
 export default function SideBar() {
   return (
     <>
-      <div className="w-20 bg-[#424D3C] h-screen flex flex-col items-center sticky">
+      <div className="w-20 bg-[#424D3C] h-screen flex flex-col items-center fixed z-auto ">
         <div className="m-5">
           <Image src="/logo.svg" alt="logo" width={50} height={50} />
         </div>
