@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect } from "react";
+import { GoHeart } from "react-icons/go";
 import Image from "next/image";
+import Link from "next/link";
 export default function Home() {
   const [quote, setQuote] = React.useState<any[]>([]);
 
@@ -11,6 +13,7 @@ export default function Home() {
       content:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo incidunt eius suscipit maiores ullam ducimus quidem alias veritatis possimus modi at sapiente, iusto ipsa corrupti nostrum unde veniam sequi. Sequi!",
       like_count: 1000,
+      catagory: "catagory",
     },
     {
       id: 2,
@@ -18,6 +21,7 @@ export default function Home() {
       content:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo incidunt eius suscipit maiores ullam ducimus quidem alias veritatis possimus modi at sapiente, iusto ipsa corrupti nostrum unde veniam sequi. Sequi!",
       like_count: 1000,
+      catagory: "catagory",
     },
     {
       id: 3,
@@ -25,20 +29,23 @@ export default function Home() {
       content:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo incidunt eius suscipit maiores ullam ducimus quidem alias veritatis possimus modi at sapiente, iusto ipsa corrupti nostrum unde veniam sequi. Sequi!",
       like_count: 1000,
+      catagory: "catagory",
     },
     {
       id: 4,
       title: "First Post",
       content:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo incidunt eius suscipit maiores ullam ducimus quidem alias veritatis possimus modi at sapiente, iusto ipsa corrupti nostrum unde veniam sequi. Sequi!",
-      like_count: 1000,
+      like_count: 212000,
+      catagory: "catagory",
     },
     {
       id: 5,
       title: "First Post",
       content:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo incidunt eius suscipit maiores ullam ducimus quidem alias veritatis possimus modi at sapiente, iusto ipsa corrupti nostrum unde veniam sequi. Sequi!",
-      like_count: 1000,
+      like_count: 33000,
+      catagory: "catagory",
     },
     {
       id: 6,
@@ -46,6 +53,7 @@ export default function Home() {
       content:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo incidunt eius suscipit maiores ullam ducimus quidem alias veritatis possimus modi at sapiente, iusto ipsa corrupti nostrum unde veniam sequi. Sequi!",
       like_count: 1000,
+      catagory: "catagory",
     },
   ];
 
@@ -124,14 +132,34 @@ export default function Home() {
           {posts.map((post) => (
             <>
               <div
-                className="m-8 h-64 w-4/12 rounded-3xl border-2 border-[#424D3C] flex flex-col justify-around"
+                className="m-8 h-64 w-5/12 rounded-3xl border-2 border-[#424D3C] flex flex-col justify-around"
                 key={post.id}
               >
-                <div className="flex justify-between p-4">
-                  <p className="text-3xl text-[#424D3C]">{post.title}</p>
-                  <p className="text-[#88593B]">{post.like_count}</p>
-                </div>
-                <p className="p-5 text-[#88593B] text-xl ">{post.content}</p>
+                <Link href={`/posts/${post.id}`}>
+                  <div>
+                    <div className="flex justify-between p-4">
+                      <p className="text-4xl text-[#424D3C]">{post.title}</p>
+                      <div className="flex justify-center items-center gap-1">
+                        <GoHeart className="text-[#88593B]" />
+                        {post.like_count > 10000 && post.like_count < 99999 ? (
+                          <p className="text-[#88593B]">
+                            {post.like_count / 1000}k
+                          </p>
+                        ) : post.like_count > 99999 ? (
+                          <p className="text-[#88593B]">
+                            {post.like_count / 100000}M
+                          </p>
+                        ) : (
+                          <p className="text-[#88593B]">{post.like_count}</p>
+                        )}
+                        <p className="text-[#88593B] ml-4">{post.catagory}</p>
+                      </div>
+                    </div>
+                    <p className="p-5 text-[#88593B] text-xl ">
+                      {post.content}
+                    </p>
+                  </div>
+                </Link>
               </div>
             </>
           ))}
