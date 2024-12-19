@@ -1,9 +1,11 @@
 "use client";
 import React, { useEffect } from "react";
+import { MantineProvider } from "@mantine/core";
 import { GoHeart } from "react-icons/go";
 import Image from "next/image";
 import Link from "next/link";
 import Hero from "./components/hero";
+import { Box } from "@mantine/core";
 export default function Home() {
   const [quote, setQuote] = React.useState<any[]>([]);
 
@@ -77,52 +79,55 @@ export default function Home() {
   }, []);
   return (
     <>
-      <div>
-        <Hero />
-        <div className="w-full pl-20 pr-40 flex flex-col items-end">
-          <p>Recent posts</p>
-          <hr
-            className="mb-5 w-full"
-            style={{ borderTop: "1px solid #424D3C" }}
-          ></hr>
-        </div>
-        <div className="flex flex-wrap justify-around">
-          {posts.map((post) => (
-            <>
-              <div
-                className="m-8 h-64 w-5/12 rounded-3xl border-2 border-[#424D3C] flex flex-col justify-around"
-                key={post.id}
-              >
-                <Link href={`/posts/${post.id}`}>
-                  <div>
-                    <div className="flex justify-between p-4">
-                      <p className="text-4xl text-[#424D3C]">{post.title}</p>
-                      <div className="flex justify-center items-center gap-1">
-                        <GoHeart className="text-[#88593B]" />
-                        {post.like_count > 10000 && post.like_count < 99999 ? (
-                          <p className="text-[#88593B]">
-                            {post.like_count / 1000}k
-                          </p>
-                        ) : post.like_count > 99999 ? (
-                          <p className="text-[#88593B]">
-                            {post.like_count / 100000}M
-                          </p>
-                        ) : (
-                          <p className="text-[#88593B]">{post.like_count}</p>
-                        )}
-                        <p className="text-[#88593B] ml-4">{post.catagory}</p>
-                      </div>
-                    </div>
-                    <p className="p-5 text-[#88593B] text-xl ">
-                      {post.content}
-                    </p>
-                  </div>
-                </Link>
-              </div>
-            </>
-          ))}
-        </div>
-      </div>
+      <MantineProvider>
+        <Box>
+          <Hero />
+          <Box className="w-full pl-20 pr-40 flex flex-col items-end">
+            <p>Recent posts</p>
+            <hr
+              className="mb-5 w-full"
+              style={{ borderTop: "1px solid #424D3C" }}
+            ></hr>
+          </Box>
+          <Box className="flex flex-wrap justify-around">
+            {posts.map((post) => (
+              <>
+                <Box
+                  className="m-8 h-64 w-5/12 rounded-3xl border-2 border-[#424D3C] flex flex-col justify-around"
+                  key={post.id}
+                >
+                  <Link href={`/posts/${post.id}`}>
+                    <Box>
+                      <Box className="flex justify-between p-4">
+                        <p className="text-4xl text-[#424D3C]">{post.title}</p>
+                        <Box className="flex justify-center items-center gap-1">
+                          <GoHeart className="text-[#88593B]" />
+                          {post.like_count > 10000 &&
+                          post.like_count < 99999 ? (
+                            <p className="text-[#88593B]">
+                              {post.like_count / 1000}k
+                            </p>
+                          ) : post.like_count > 99999 ? (
+                            <p className="text-[#88593B]">
+                              {post.like_count / 100000}M
+                            </p>
+                          ) : (
+                            <p className="text-[#88593B]">{post.like_count}</p>
+                          )}
+                          <p className="text-[#88593B] ml-4">{post.catagory}</p>
+                        </Box>
+                      </Box>
+                      <p className="p-5 text-[#88593B] text-xl ">
+                        {post.content}
+                      </p>
+                    </Box>
+                  </Link>
+                </Box>
+              </>
+            ))}
+          </Box>
+        </Box>
+      </MantineProvider>
     </>
   );
 }
